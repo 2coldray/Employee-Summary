@@ -15,10 +15,14 @@ const Employee_Ids = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-console.log("Please build your team")
 
+//Opening Statement
+console.log("Please build your team!")
+
+//Function that starts building team
 buildManager();
 
+//Function that builds manager card
 function buildManager() {
   inquirer.prompt(questions.manager(Employee_Ids)).then((response) => {
     var employee = new Manager(
@@ -32,6 +36,8 @@ function buildManager() {
     continueTeam();
   });
 }
+
+//Function that builds engineer card
 function buildEngineer() {
   inquirer.prompt(questions.engineer(Employee_Ids)).then((response) => {
     var employee = new Engineer(
@@ -45,6 +51,8 @@ function buildEngineer() {
     continueTeam();
   });
 }
+
+//Function that builds intern card
 function buildIntern() {
   inquirer.prompt(questions.intern(Employee_Ids)).then((response) => {
     var employee = new Intern(
@@ -58,6 +66,8 @@ function buildIntern() {
     continueTeam();
   });
 }
+
+//Based on user's input, this function will write the team.html file
 function continueTeam() {
   inquirer.prompt(questions.continue).then((response) => {
     switch (response.choice) {
