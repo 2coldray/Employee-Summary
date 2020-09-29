@@ -18,7 +18,10 @@ A team generator command line application was built for this assignment. The app
 ## Usage
 This is what the questions look like from the prompt.
 
+![Screen Shot 2020-09-29 at 6 21 07 PM](https://user-images.githubusercontent.com/60899926/94622731-b3c47c00-0280-11eb-9cdd-46a7c0cc12f0.png)
+
 This is what generated html file looks like when finished.
+![Screen Shot 2020-09-29 at 6 21 31 PM](https://user-images.githubusercontent.com/60899926/94622737-b6bf6c80-0280-11eb-9182-1f7090548b64.png)
 
 ## Credits
 I used the class activities from units 9 and 10 to complete this activity. I also had a tutoring session with my tutor Benjamin Benson to guide me through writing the prompt.
