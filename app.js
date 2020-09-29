@@ -2,6 +2,7 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
+const questions = require("./lib/questions");
 const path = require("path");
 const fs = require("fs");
 
@@ -9,10 +10,68 @@ const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
-
+const Employee_Objects = [];
+const Employee_Ids = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+buildManager();
+
+function buildManager() {
+  inquirer.prompt(questions.manager(Employee_Ids)).then((response) => {
+    var employee = new Manager(
+      response.name,
+      response.id,
+      response.email,
+      response.officeNumber
+    );
+    Employee_Ids.push(employee.id);
+    Employee_Objects.push(employee);
+    continueTeam();
+  });
+}
+function buildEngineer() {
+  inquirer.prompt(questions.engineer(Employee_Ids)).then((response) => {
+    var employee = new Engineer(
+      response.name,
+      response.id,
+      response.email,
+      response.github
+    );
+    Employee_Ids.push(employee.id);
+    Employee_Objects.push(employee);
+    continueTeam();
+  });
+}
+function buildIntern() {
+  inquirer.prompt(questions.intern(Employee_Ids)).then((response) => {
+    var employee = new Intern(
+      response.name,
+      response.id,
+      response.email,
+      response.school
+    );
+    Employee_Ids.push(employee.id);
+    Employee_Objects.push(employee);
+    continueTeam();
+  });
+}
+function continueTeam() {
+  inquirer.prompt(questions.continue).then((response) => {
+    switch (response.choice) {
+      case "engineer":
+        buildEngineer();
+        break;
+      case "intern":
+        buildIntern();
+        break;
+      case "exit":
+        var html = render(Employee_Objects);
+        fs.writeFileSync(outputPath, html);
+        break;
+    }
+  });
+}
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
@@ -34,49 +93,3 @@ const render = require("./lib/htmlRenderer");
 // object with the correct structure and methods. This structure will be crucial in order
 // for the provided `render` function to work! ```
 
-console.log("Please Build your team")
-
-const manager = [
-    {
-        type: "input",
-        message: "What is your manager's name?",
-        name: "name"
-    },
-    {
-        type: "input",
-        message: "What is your manager's id?",
-        name: "id"
-    },
-    {
-        type: "input",
-        message: "What is your manager's email?",
-        name: "email",
-    },
-    {
-        type: "input",
-        message: "What is your manager's office number?",
-        name: "officeNumber"
-    },
-    {
-        type: "list",
-        message: "Which type of team member would you like to add?",
-        choices: 
-        name:
-    }
-];
-
-const engineer = [
-    {
-        type: "input",
-        message: "What is your engineer's name?",
-        name: "name"
-    },
-    {
-        type: "input",
-        message: "What is your engineer's id?",
-        name: "id"
-    },
-    {
-        type: ""
-    }
-]
